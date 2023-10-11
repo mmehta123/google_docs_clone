@@ -7,13 +7,14 @@ const signUp = async (req, res) => {
     if (!user) {
       const newUser = new User(req.body);
       await newUser.save();
-      return res.status(200).json({ success: true, user:newUser });
+      return res.status(200).json({ user: newUser });
     }
     return res
       .status(400)
-      .json({ success: false, message: "User Already Exists" });
-  } catch (error) {}
-  return res.status(500).json({ success: false, message: error.message });
+      .json({error: "User Already Exists" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 };
 
 const signIn = async (req, res) => {};
